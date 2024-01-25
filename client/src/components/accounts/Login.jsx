@@ -49,14 +49,25 @@ const SignupButton = styled(Button)`
   box-shadow: 0 2px 4px 0 rgba(0 0 0/20%);
 `;
 
+const signupInitialValues = {
+  name: "",
+  email: "",
+  password: "",
+};
+
 // Change function name to start with an uppercase letter
 const Login = () => {
   const imageURL =
     "https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png";
-
+  //..................hooks...................
   const [account, toggleAccount] = useState("login");
+  const [signup, setSignup] = useState(signupInitialValues);
+  //..................functions ..........................
   const toggleSignup = () => {
     toggleAccount(account === "signup" ? "login" : "signup");
+  };
+  const onInputChange = (e) => {
+    setSignup({ ...signup, [e.target.name]: e.target.value });
   };
 
   return (
@@ -75,9 +86,24 @@ const Login = () => {
           </Wrapper>
         ) : (
           <Wrapper>
-            <TextField label="Enter Name" variant="standard" />
-            <TextField label="Enter Email" variant="standard" />
-            <TextField label="Enter password" variant="standard" />
+            <TextField
+              label="Enter Name"
+              onChange={(e) => onInputChange(e)}
+              name="Name"
+              variant="standard"
+            />
+            <TextField
+              label="Enter Email"
+              onChange={(e) => onInputChange(e)}
+              name="Email"
+              variant="standard"
+            />
+            <TextField
+              label="Enter password"
+              onChange={(e) => onInputChange(e)}
+              name="Password"
+              variant="standard"
+            />
             <SignupButton>Signup</SignupButton>
             <Text style={{ textAlign: "center" }}>OR</Text>
             <LoginButton variant="contained" onClick={() => toggleSignup()}>
